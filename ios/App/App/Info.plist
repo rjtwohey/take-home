@@ -21,11 +21,10 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>prefs</string>
+				<string>msauth</string>
+				<string>io.ionic.take-home-test</string>
 			</array>
 		</dict>
 	</array>
