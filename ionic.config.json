@@ -1,0 +1,7 @@
+{
+  "name": "take-home",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
