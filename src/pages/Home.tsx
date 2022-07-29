@@ -9,21 +9,24 @@ const Home: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
-          <IonTitle>Home</IonTitle>
-
-        </IonToolbar>
-
-      </IonHeader>
-      <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonItem lines='none'>
+        <IonItem lines='none'>
           <IonToolbar>
-            <IonTitle size="large">Home</IonTitle>
+            <IonTitle>Home</IonTitle>
           </IonToolbar>
           <IonButton size='default' onClick={() => history.replace('/login')}>
             <IonIcon slot="icon-only" icon={logOutOutline} />
           </IonButton>
+        </IonItem>
+      </IonHeader>
+      <IonContent fullscreen>
+        <IonHeader collapse="condense">
+          <IonItem lines='none'>
+            <IonToolbar>
+              <IonTitle size="large">Home</IonTitle>
+            </IonToolbar>
+            <IonButton size='default' onClick={() => history.replace('/login')}>
+              <IonIcon slot="icon-only" icon={logOutOutline} />
+            </IonButton>
           </IonItem>
         </IonHeader>
         <ExploreContainer />
