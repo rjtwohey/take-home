@@ -1,0 +1,3 @@
+ion-button.login-btn > *:host {
+    border-radius: 10px !important;
+}
