@@ -23,6 +23,7 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import Login from './pages/Login';
 import { SessionProvider } from './auth/SessionProvider';
+import { PrivateRoute } from './auth/PrivateRoute';
 
 setupIonicReact();
 
@@ -31,9 +32,11 @@ const App: React.FC = () => (
     <SessionProvider>
       <IonReactRouter>
         <IonRouterOutlet>
-          <Route exact path="/home">
-            <Home />
-          </Route>
+          <PrivateRoute>
+            <Route exact path="/home">
+              <Home />
+            </Route>
+          </PrivateRoute>
           <Route exact path="/login">
             <Login />
           </Route>
