@@ -7,42 +7,21 @@ import  getAuth  from '../auth/auth';
 import { useRef } from 'react';
 import { IonicAuth } from '@ionic-enterprise/auth';
 import './Login.css';
+import { User } from '../models';
+import { useSession } from '../auth/useSession';
 
 const Login: React.FC = () => {
-    const [user, setUser] = useState<Object | null>(null); //TODO make user type
+    // const [user, setUser] = useState<User | undefined>(undefined); //TODO make user type
     const history = useHistory();
     const {config} = getAuth();
     const authConnectRef = useRef<IonicAuth>(new IonicAuth({...config}))
+    const {login, user} = useSession();
 
     const handleLogin = async () => {
         // history.replace('/home');\
-        const auth = authConnectRef.current;
-        console.log(config, auth);
-        console.log(`${process.env.REACT_APP_CLIENT_ID}`)
-        try {
-            await auth.login();
-            const user = await getUserInfo();
-            console.log(user);
-            history.replace('/home');
-        } catch (e: any) {
-            console.log('there was an error!', e);
-        }
+        await login('blah');
+        user && history.replace('/home')
     }
-
-    const getUserInfo = async (): Promise<Object | undefined> => {
-        const auth = authConnectRef.current;
-        const idToken = await auth.getIdToken();
-        if (!idToken) return;
-
-        console.log(idToken);
-        const { sub, firstName, lastName } = idToken;
-        let email = idToken.email;
-        if (idToken.emails instanceof Array) {
-            email = idToken.emails[0];
-        }
-
-        return { id: sub, email, firstName, lastName };
-    };
 
     return (
         <IonPage>

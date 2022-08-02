@@ -4,6 +4,8 @@ import { logOutOutline } from 'ionicons/icons';
 import { useHistory } from 'react-router';
 import './Home.css';
 
+
+//TODO guard this route
 const Home: React.FC = () => {
   const history = useHistory();
   return (
