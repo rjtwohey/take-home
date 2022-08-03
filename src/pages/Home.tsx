@@ -2,12 +2,24 @@ import { IonContent, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar, IonButto
 import ExploreContainer from '../components/ExploreContainer';
 import { logOutOutline } from 'ionicons/icons';
 import { useHistory } from 'react-router';
+import { useState, useEffect } from 'react';
+import { useSession } from '../auth/useSession';
 import './Home.css';
 
 
 //TODO guard this route
 const Home: React.FC = () => {
+  const [token, setToken] = useState<string | undefined>(undefined);
   const history = useHistory();
+  const {getAccessToken} = useSession();
+
+  useEffect(() => {
+    const initializeData = async () => {
+      const userToken = await getAccessToken();
+      setToken(userToken);
+    }
+  }, [])
+
   return (
     <IonPage>
       <IonHeader>

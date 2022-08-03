@@ -17,6 +17,10 @@ const Login: React.FC = () => {
     const authConnectRef = useRef<IonicAuth>(new IonicAuth({...config}))
     const {login, user} = useSession();
 
+    useEffect(() => {
+        user && history.replace('/home');
+    }, [history, user])
+
     const handleLogin = async () => {
         // history.replace('/home');\
         await login('blah');

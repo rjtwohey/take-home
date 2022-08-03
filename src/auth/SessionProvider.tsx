@@ -1,5 +1,5 @@
 import { IonSpinner } from "@ionic/react";
-import { createContext, useEffect, useReducer, useState } from "react";
+import { createContext, useCallback, useEffect, useReducer, useState } from "react";
 import { Session } from "../models";
 import { Preferences } from '@capacitor/preferences';
 import Axios from 'axios';
@@ -16,7 +16,7 @@ interface SessionState {
 
 const initialState: SessionState = {
     user: undefined,
-    loading: false,
+    loading: true,
     error: '',
 };
 
@@ -89,7 +89,7 @@ export const SessionProvider: React.FC = ({ children }) => {
     const authConnectRef = useRef<IonicAuth>(new IonicAuth({ ...config }))
 
     useEffect(() => {
-        // attemptSessionRestore().finally(() => setInitializing(false));
+        restoreSession().finally(() => setInitializing(false));
     }, []);
 
 
@@ -142,9 +142,21 @@ export const SessionProvider: React.FC = ({ children }) => {
         //TODO
     }
 
-    const restoreSession = async () => {
-        //TODO
-    }
+    const restoreSession = useCallback(async () => {
+        const auth = authConnectRef.current;
+        try {
+            const isAuthenticated = await auth.isAuthenticated();
+            if (!isAuthenticated) return dispatch({ type: 'CLEAR_SESSION' })
+            if (isAuthenticated) {
+                const user = await getUserInfo();
+                console.log(user)
+                if (!user) throw new Error('No user information.');
+                dispatch({ type: 'RESTORE_SESSION', user });
+            }
+        } catch (e) {
+            dispatch({ type: 'CLEAR_SESSION' });
+        }
+    }, []);
 
     const getAccessToken = async (): Promise<string | undefined> => {
         const auth = authConnectRef.current;
