@@ -93,7 +93,7 @@ export const SessionProvider: React.FC = ({ children }) => {
     }, []);
 
 
-    const login = async (mode: any) => {
+    const login = async (mode: any): Promise<void> => {
         setInitializing(false)
         //This will use identity vault later to verify that the user can access storage
         const auth = authConnectRef.current;
