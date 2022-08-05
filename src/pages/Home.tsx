@@ -5,6 +5,7 @@ import { useHistory } from 'react-router';
 import { useState, useEffect } from 'react';
 import { useSession } from '../auth/useSession';
 import './Home.css';
+import Tea from './Tea';
 
 
 //TODO guard this route
@@ -17,8 +18,13 @@ const Home: React.FC = () => {
     const initializeData = async () => {
       const userToken = await getAccessToken();
       setToken(userToken);
+      console.log(userToken);
     }
+
+    initializeData();
   }, [])
+
+  
 
   return (
     <IonPage>
@@ -43,7 +49,8 @@ const Home: React.FC = () => {
             </IonButton>
           </IonItem>
         </IonHeader>
-        <ExploreContainer />
+        {/* <ExploreContainer /> */}
+        <Tea/>
       </IonContent>
     </IonPage>
   );

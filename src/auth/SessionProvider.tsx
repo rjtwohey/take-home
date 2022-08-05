@@ -139,7 +139,9 @@ export const SessionProvider: React.FC = ({ children }) => {
     }
 
     const invalidate = async () => {
-        //TODO
+        const auth = authConnectRef.current;
+        await auth.clearStorage();
+        dispatch({type: 'CLEAR_SESSION'})
     }
 
     const restoreSession = useCallback(async () => {
