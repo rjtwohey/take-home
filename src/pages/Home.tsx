@@ -1,4 +1,4 @@
-import { IonContent, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar, IonButton, IonItem } from '@ionic/react';
+import { IonContent, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar, IonButton, IonItem, isPlatform } from '@ionic/react';
 import ExploreContainer from '../components/ExploreContainer';
 import { logOutOutline } from 'ionicons/icons';
 import { useHistory } from 'react-router';
@@ -33,9 +33,9 @@ const Home: React.FC = () => {
           <IonToolbar>
             <IonTitle>Home</IonTitle>
           </IonToolbar>
-          <IonButton size='default' onClick={() => history.replace('/login')}>
+          {!isPlatform('mobile') && <IonButton size='default' onClick={() => history.replace('/login')}>
             <IonIcon slot="icon-only" icon={logOutOutline} />
-          </IonButton>
+          </IonButton>}
         </IonItem>
       </IonHeader>
       <IonContent fullscreen>
